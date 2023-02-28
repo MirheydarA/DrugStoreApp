@@ -109,10 +109,11 @@ namespace Presentation
                                 break;
                             
                             case (int)DrugStoreOptions.GetAll:
+                                _drugStoreService.GetAll();
                                 break;
                             
                             case (int)DrugStoreOptions.BackToMainMenu:
-                                break;
+                                goto MainMenuDesc;
 
                         }
                     }

@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories.Abstract
 {
-    public interface IOwnerRepository : IRepository<Owner>
+    public interface IRepository<T> where T : BaseEntity
     {
-
+        List<T> GetAll();
+        T Get(int id);
+        void Add(T item);
+        void Update(T item);
+        void Delete(T item);
     }
 }

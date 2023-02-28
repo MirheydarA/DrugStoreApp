@@ -16,7 +16,7 @@ namespace Data.Repositories.Concrete
         {
             return DbContext.DrugStores;
         }
-        public DrugStore DrugStoreGetById(int id)
+        public DrugStore Get(int id)
         {
             return DbContext.DrugStores.FirstOrDefault(d => d.Id == id);
         }

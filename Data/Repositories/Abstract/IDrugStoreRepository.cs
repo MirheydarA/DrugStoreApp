@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories.Abstract
 {
-    public interface IDrugStoreRepository
+    public interface IDrugStoreRepository : IRepository<DrugStore>
     {
-        List<DrugStore> GetAll();
-        DrugStore DrugStoreGetById(int id);
-        void Add(DrugStore drugStore);
-        void Update(DrugStore drugStore);
-        void Delete(DrugStore drugStore);
+
     }
 }

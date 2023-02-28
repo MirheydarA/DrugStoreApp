@@ -84,7 +84,7 @@ namespace Presentation.Services
                 return;
             }
 
-        UpdatıngDesc: ConsoleHelper.WriteWithColor("Enter owner ID for updating", ConsoleColor.DarkCyan);
+        UpdatıngDesc: ConsoleHelper.WriteWithColor("Enter owner ID for updating", ConsoleColor.Cyan);
             int id;
             bool isSucceeded = int.TryParse(Console.ReadLine(), out id);
             if (!isSucceeded)
