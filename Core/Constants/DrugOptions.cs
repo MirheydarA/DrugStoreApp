@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Core.Constants
 {
-    internal class Drug
+    public enum DrugOptions
     {
+        BackToMainMenu,
+        Create,
+        Update,
+        Delete,
+        GetAll
     }
 }
