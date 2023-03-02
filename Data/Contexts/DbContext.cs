@@ -13,9 +13,12 @@ namespace Data.Contexts
         {
             Owners = new List<Owner>();
 
-            DrugStores= new List<DrugStore>();
+            DrugStores = new List<DrugStore>();
+
+            Druggists = new List<Druggist>();
         }
         public static List<Owner> Owners { get; set; }
-        public static List<DrugStore> DrugStores { get; set; }        
+        public static List<DrugStore> DrugStores { get; set; }
+        public static List<Druggist> Druggists{ get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace Presentation.Services
         }
         public void Create()
         {
-            
+
             if (_ownerRepository.GetAll().Count == 0)
             {
                 ConsoleHelper.WriteWithColor("You must create owner for create DrugStore!", ConsoleColor.DarkCyan);
@@ -73,7 +73,7 @@ namespace Presentation.Services
                 Email = email,
                 Owner = owner
             };
-            owner.Drugstores.Add(drugStore);    
+            owner.Drugstores.Add(drugStore);
             _drugStoreRepository.Add(drugStore);
             ConsoleHelper.WriteWithColor($"{drugStore.Name} drugstore is succesfully created", ConsoleColor.Green);
         }
@@ -84,14 +84,12 @@ namespace Presentation.Services
             ConsoleHelper.WriteWithColor("* -- All DrugStores -- *");
             if (drugStores.Count == 0)
             {
-                ConsoleHelper.WriteWithColor("There is no any DrugStore",ConsoleColor.Red);
+                ConsoleHelper.WriteWithColor("There is no any DrugStore", ConsoleColor.Red);
             }
             foreach (var drugStore in drugStores)
             {
                 ConsoleHelper.WriteWithColor($"ID:{drugStore.Id} Name:{drugStore.Name} Email:{drugStore.Email} Owner:{drugStore.Owner.Name} {drugStore.Owner.Surname} {drugStore.Owner.Id} ");
             }
-
-
         }
 
         public void Delete()
@@ -102,7 +100,7 @@ namespace Presentation.Services
             {
                 return;
             }
-            EnterIdDesc: ConsoleHelper.WriteWithColor("Enter ID for deleting", ConsoleColor.DarkCyan);
+        EnterIdDesc: ConsoleHelper.WriteWithColor("Enter ID for deleting", ConsoleColor.DarkCyan);
             int id;
             bool isSucceeded = int.TryParse(Console.ReadLine(), out id);
             if (!isSucceeded)
@@ -119,7 +117,6 @@ namespace Presentation.Services
             }
             _drugStoreRepository.Delete(dbdrugStore);
             ConsoleHelper.WriteWithColor("DrugStore is succesfully deleted", ConsoleColor.Green);
-
         }
 
         public void Update()
@@ -188,7 +185,7 @@ namespace Presentation.Services
             drugStore.ContactNumber = contactnumber;
             drugStore.Owner = owner;
 
-            
+
             _drugStoreRepository.Update(drugStore);
             ConsoleHelper.WriteWithColor("DrugStore is succesfully updating", ConsoleColor.Green);
         }

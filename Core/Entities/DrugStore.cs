@@ -11,9 +11,9 @@ namespace Core.Entities
         public string Address { get; set; }
         public string ContactNumber { get; set; }
         public string Email { get; set; }
-        //public List<Druggists> Druggists { get; set; }
         //public List<Drugs> Drugs { get; set; }
         public Owner Owner { get; set; }
+        public List<Druggist> Druggists { get; set; }
 
     
     }

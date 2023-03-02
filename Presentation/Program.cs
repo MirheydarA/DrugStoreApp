@@ -9,11 +9,13 @@ namespace Presentation
     {
         private readonly static OwnerService _ownerService;
         private readonly static DrugStoreService _drugStoreService;
+        private readonly static DruggistService _druggistService;
 
         static Program()
         {
             _ownerService = new OwnerService();
             _drugStoreService = new DrugStoreService();
+            _druggistService = new DruggistService();
         }
         static void Main(string[] args)
         {
@@ -120,7 +122,7 @@ namespace Presentation
                             default:
                                 ConsoleHelper.WriteWithColor("Your choise is not correct!", ConsoleColor.Red);
                                 ConsoleHelper.WriteWithColor("Please try again", ConsoleColor.DarkCyan);
-                                goto DrugStoreMenuDesc;                                
+                                goto DrugStoreMenuDesc;
                         }
                     }
 
@@ -144,16 +146,31 @@ namespace Presentation
 
                         switch (number)
                         {
-                            case(int) DruggistOptions:
+                            case (int)DruggistOptions.Create:
+                                _druggistService.Create();
                                 break;
+                            
+                            case (int)DruggistOptions.Update:
+                                _druggistService.Update();
+                                break;
+                            
+                            case (int)DruggistOptions.Delete:
+                                _druggistService.Delete();
+                                break;
+                            
+                            case (int)DruggistOptions.GetAll:
+                                _druggistService.GetAll();
+                                break;
+                            
+                            case (int)DruggistOptions.BackToMainMenu:
+                                goto MainMenuDesc;
 
-                                case(int) 
                             default:
                                 ConsoleHelper.WriteWithColor("Your choise is not correct!", ConsoleColor.Red);
                                 ConsoleHelper.WriteWithColor("Please try again", ConsoleColor.DarkCyan);
                                 goto DruggistMenuDesc;
                         }
-                    }                    
+                    }
 
                 case (int)MainMenuOptions.Drugs:
                     break;
