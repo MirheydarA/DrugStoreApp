@@ -22,16 +22,30 @@ namespace Data.Repositories.Concrete
         }
         public void Add(DrugStore drugStore)
         {
+            id++;
+            drugStore.Id = id;
             DbContext.DrugStores.Add(drugStore);
         }
         public void Update(DrugStore drugStore)
         {
-            throw new NotImplementedException();
+            var dbDrugStore = DbContext.DrugStores.FirstOrDefault(dr => dr.Id == id);
+            if (dbDrugStore != null)
+            {
+                dbDrugStore.Name= drugStore.Name;
+                dbDrugStore.ContactNumber= drugStore.ContactNumber;
+                dbDrugStore.Address= drugStore.Address;
+                dbDrugStore.Owner= drugStore.Owner;
+                dbDrugStore.Email= drugStore.Email;
+            }
         }
 
         public void Delete(DrugStore drugStore)
         {
             DbContext.DrugStores.Remove(drugStore);
+        }
+        public bool IsDuplicatedEmail(string email)
+        {
+            return DbContext.DrugStores.Any(d => d.Email == email);
         }
     }
 }

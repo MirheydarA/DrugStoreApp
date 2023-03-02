@@ -23,7 +23,7 @@ namespace Data.Repositories.Concrete
 
         public void Add(Owner owner)
         {
-            id++;
+            ++id;
             owner.Id = id;
             DbContext.Owners.Add(owner);
         }
@@ -40,11 +40,6 @@ namespace Data.Repositories.Concrete
         public void Delete(Owner owner)
         {
             DbContext.Owners.Remove(owner);
-        }
-
-        public static implicit operator OwnerRepository(Owner v)
-        {
-            throw new NotImplementedException();
         }
     }
 }

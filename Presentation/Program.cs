@@ -24,7 +24,7 @@ namespace Presentation
             ConsoleHelper.WriteWithColor("2. Drugstores", ConsoleColor.DarkYellow);
             ConsoleHelper.WriteWithColor("3. Druggists ", ConsoleColor.DarkYellow);
             ConsoleHelper.WriteWithColor("4. Drugs", ConsoleColor.DarkYellow);
-            ConsoleHelper.WriteWithColor("5. Logout", ConsoleColor.DarkYellow);
+            ConsoleHelper.WriteWithColor("0. Logout", ConsoleColor.DarkYellow);
             ConsoleHelper.WriteWithColor("<- Choose option ->", ConsoleColor.DarkCyan);
 
             int number;
@@ -81,7 +81,7 @@ namespace Presentation
                 case (int)MainMenuOptions.Drugstores:
                     while (true)
                     {
-                    DrugStoreDesc: ConsoleHelper.WriteWithColor("1. Create DrugStore", ConsoleColor.DarkYellow);
+                    DrugStoreMenuDesc: ConsoleHelper.WriteWithColor("1. Create DrugStore", ConsoleColor.DarkYellow);
                         ConsoleHelper.WriteWithColor("2. Update DrugStore", ConsoleColor.DarkYellow);
                         ConsoleHelper.WriteWithColor("3. Delete DrugStore", ConsoleColor.DarkYellow);
                         ConsoleHelper.WriteWithColor("4. Get all DrugStore", ConsoleColor.DarkYellow);
@@ -93,7 +93,7 @@ namespace Presentation
                         if (!isSucceeded)
                         {
                             ConsoleHelper.WriteWithColor("Inputed number is not correct format!", ConsoleColor.Red);
-                            goto DrugStoreDesc;
+                            goto DrugStoreMenuDesc;
                         }
 
                         switch (number)
@@ -101,25 +101,59 @@ namespace Presentation
                             case (int)DrugStoreOptions.Create:
                                 _drugStoreService.Create();
                                 break;
-                            
+
                             case (int)DrugStoreOptions.Update:
+                                _drugStoreService.Update();
                                 break;
-                            
+
                             case (int)DrugStoreOptions.Delete:
+                                _drugStoreService.Delete();
                                 break;
-                            
+
                             case (int)DrugStoreOptions.GetAll:
                                 _drugStoreService.GetAll();
                                 break;
-                            
+
                             case (int)DrugStoreOptions.BackToMainMenu:
                                 goto MainMenuDesc;
 
+                            default:
+                                ConsoleHelper.WriteWithColor("Your choise is not correct!", ConsoleColor.Red);
+                                ConsoleHelper.WriteWithColor("Please try again", ConsoleColor.DarkCyan);
+                                goto DrugStoreMenuDesc;                                
                         }
                     }
 
                 case (int)MainMenuOptions.Druggists:
-                    break;
+                    while (true)
+                    {
+                    DruggistMenuDesc: ConsoleHelper.WriteWithColor("1. Create Druggist", ConsoleColor.DarkYellow);
+                        ConsoleHelper.WriteWithColor("2. Update Druggist", ConsoleColor.DarkYellow);
+                        ConsoleHelper.WriteWithColor("3. Delete Druggist", ConsoleColor.DarkYellow);
+                        ConsoleHelper.WriteWithColor("4. Get all Druggist", ConsoleColor.DarkYellow);
+                        ConsoleHelper.WriteWithColor("0. Back to main menu", ConsoleColor.DarkYellow);
+
+                        ConsoleHelper.WriteWithColor("<- Choose option ->", ConsoleColor.DarkCyan);
+
+                        isSucceeded = int.TryParse(Console.ReadLine(), out number);
+                        if (!isSucceeded)
+                        {
+                            ConsoleHelper.WriteWithColor("Inputed number is not correct format!", ConsoleColor.Red);
+                            goto DruggistMenuDesc;
+                        }
+
+                        switch (number)
+                        {
+                            case(int) DruggistOptions:
+                                break;
+
+                                case(int) 
+                            default:
+                                ConsoleHelper.WriteWithColor("Your choise is not correct!", ConsoleColor.Red);
+                                ConsoleHelper.WriteWithColor("Please try again", ConsoleColor.DarkCyan);
+                                goto DruggistMenuDesc;
+                        }
+                    }                    
 
                 case (int)MainMenuOptions.Drugs:
                     break;

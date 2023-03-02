@@ -21,7 +21,7 @@ namespace Presentation.Services
         public void GetAll()
         {
             var owners = _ownerRepository.GetAll();
-            ConsoleHelper.WriteWithColor("* -- All Groups -- *");
+            ConsoleHelper.WriteWithColor("* -- All Owners -- *");
             if (owners.Count == 0)
             {
                 ConsoleHelper.WriteWithColor("There is no any group.", ConsoleColor.Red);

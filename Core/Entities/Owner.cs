@@ -8,7 +8,10 @@ namespace Core.Entities
 {
     public class Owner : BaseEntity
     {
-        
+        public Owner()
+        {
+            Drugstores= new List<DrugStore>();
+        }
         public string Surname { get; set; }
         public List<DrugStore> Drugstores { get; set; }
     }
