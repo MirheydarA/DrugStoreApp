@@ -11,6 +11,8 @@ namespace Core.Entities
         public DrugStore()
         {
             Drugs = new List<Drug>();
+            Druggists = new List<Druggist>();
+            Drugs = new List<Drug>();
         }
         public string Address { get; set; }
         public string ContactNumber { get; set; }

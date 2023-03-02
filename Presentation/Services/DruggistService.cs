@@ -25,7 +25,8 @@ namespace Presentation.Services
         {
             if (_drugStoreRepository.GetAll().Count == 0)
             {
-                ConsoleHelper.WriteWithColor("You must create DrugStore first");
+                ConsoleHelper.WriteWithColor("You must create DrugStore first", ConsoleColor.Red);
+                return;
             }
             ConsoleHelper.WriteWithColor("Enter Druggist name", ConsoleColor.Cyan);
             string name = Console.ReadLine();
@@ -37,6 +38,11 @@ namespace Presentation.Services
             if (!isSucceeded)
             {
                 ConsoleHelper.WriteWithColor("Inputed age is not correct format!", ConsoleColor.Red);
+                goto EnterAgeDesc;
+            }
+            if (age < 18)
+            {
+                ConsoleHelper.WriteWithColor("Inputed age must bigger than 18!", ConsoleColor.Red);
                 goto EnterAgeDesc;
             }
         EnterExperienceDesc: ConsoleHelper.WriteWithColor("Enter Druggist experience", ConsoleColor.Cyan);
@@ -84,10 +90,10 @@ namespace Presentation.Services
 
         }
 
-        public void GetAll()
+        public void GetAll()    
         {
             var druggists = _druggistRepository.GetAll();
-            ConsoleHelper.WriteWithColor("* -- All DrugStores -- *");
+            ConsoleHelper.WriteWithColor("* -- All Drugists-- *");
             if (druggists.Count is 0)
             {
                 ConsoleHelper.WriteWithColor("There is no any Druggist", ConsoleColor.Red);

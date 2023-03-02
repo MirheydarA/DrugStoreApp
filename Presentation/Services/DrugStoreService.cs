@@ -26,7 +26,7 @@ namespace Presentation.Services
 
             if (_ownerRepository.GetAll().Count == 0)
             {
-                ConsoleHelper.WriteWithColor("You must create owner for create DrugStore!", ConsoleColor.DarkCyan);
+                ConsoleHelper.WriteWithColor("You must create owner for create DrugStore!", ConsoleColor.Red);
                 return;
             }
             ConsoleHelper.WriteWithColor("Enter DrugStore name", ConsoleColor.Cyan);

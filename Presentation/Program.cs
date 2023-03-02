@@ -181,6 +181,7 @@ namespace Presentation
                         ConsoleHelper.WriteWithColor("2. Update Drug", ConsoleColor.DarkYellow);
                         ConsoleHelper.WriteWithColor("3. Delete Drug", ConsoleColor.DarkYellow);
                         ConsoleHelper.WriteWithColor("4. Get all Drug", ConsoleColor.DarkYellow);
+                        ConsoleHelper.WriteWithColor("5. Get Drugs by Drugstore", ConsoleColor.DarkYellow);
                         ConsoleHelper.WriteWithColor("0. Back to main menu", ConsoleColor.DarkYellow);
 
                         ConsoleHelper.WriteWithColor("<- Choose option ->", ConsoleColor.DarkCyan);
@@ -199,12 +200,19 @@ namespace Presentation
                                 break;
                             
                             case (int)DrugOptions.Update:
+                                _drugService.Update();  
                                 break;
                             
                             case (int)DrugOptions.Delete:
+                                _drugService.Delete();
                                 break;
                             
                             case (int)DrugOptions.GetAll:
+                                _drugService.GetAll();
+                                break;
+
+                            case (int)DrugOptions.GetDrugsByDrugstore:
+                                _drugService.GetDrugsByDrugstore();
                                 break;
                             
                             case (int)DrugOptions.BackToMainMenu:
@@ -218,7 +226,7 @@ namespace Presentation
                     }
 
                 case (int)MainMenuOptions.Logout:
-                    break;
+                    goto MainMenuDesc;
 
                 default:
                     ConsoleHelper.WriteWithColor("Your choise is not correct!", ConsoleColor.Red);
