@@ -101,14 +101,14 @@ namespace Presentation.Services
             }
 
             var drugs = _drugRepository.GetAll();
-            ConsoleHelper.WriteWithColor("* -- All DrugStores -- *");
+            ConsoleHelper.WriteWithColor("* -- All Drugs -- *");
             if (drugs.Count is 0)
             {
                 return;
             }
             foreach (var drug in drugStore.Drugs)
             {
-                ConsoleHelper.WriteWithColor($"Name:{drug.Name} Price:{drug.Price} Count:{drug.Count}");
+                ConsoleHelper.WriteWithColor($"ID:{drug.Id} Name:{drug.Name} Price:{drug.Price} Count:{drug.Count}");
             }
         }
 
@@ -217,11 +217,13 @@ namespace Presentation.Services
             drug.Name = name;
             drug.Price = price;
             drug.Count = count;
+            
             drug.DrugStore = drugStore;
 
             drugStore.Drugs.Add(drug);
             _drugRepository.Add(drug);
-            ConsoleHelper.WriteWithColor($"{drug.Name} is succesfully updated", ConsoleColor.Green);
+            ConsoleHelper.WriteWithColor($"{drug.Name}  is succesfully updated", ConsoleColor.Green);
+            
         }
     }
 }

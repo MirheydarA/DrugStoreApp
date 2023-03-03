@@ -12,6 +12,7 @@ namespace Core.Constants
         Owners,
         Drugstores,
         Druggists,
-        Drugs
+        Drugs,
+        Sale
     }
 }
