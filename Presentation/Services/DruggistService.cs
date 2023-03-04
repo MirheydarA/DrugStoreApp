@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Core.Helpers;
+using Data.Repositories.Abstract;
 using Data.Repositories.Concrete;
 using System;
 using System.Collections.Generic;
@@ -90,7 +91,7 @@ namespace Presentation.Services
 
         }
 
-        public void GetAll()    
+        public void GetAll()
         {
             var druggists = _druggistRepository.GetAll();
             ConsoleHelper.WriteWithColor("* -- All Drugists-- *");
@@ -203,6 +204,40 @@ namespace Presentation.Services
            
             _druggistRepository.Update(druggist);
             ConsoleHelper.WriteWithColor("Druggist is succesfully updating", ConsoleColor.Green);
+        }
+
+        public void GetAllDruggistsByDrugStore()
+        {
+            _drugStoreService.GetAll();
+            if (_drugStoreRepository.GetAll().Count is 0)
+            {
+                ConsoleHelper.WriteWithColor("You must create DrugStore first!", ConsoleColor.DarkCyan);
+                return;
+            }
+        EnterIdDesc: ConsoleHelper.WriteWithColor("Enter DrugStore ID");
+            int id;
+            bool isSucceeded = int.TryParse(Console.ReadLine(), out id);
+            if (!isSucceeded)
+            {
+                ConsoleHelper.WriteWithColor("Inputed Id is not correct format!", ConsoleColor.Red);
+                goto EnterIdDesc;
+            }
+            var drugStore = _drugStoreRepository.Get(id);
+            if (drugStore is null)
+            {
+                ConsoleHelper.WriteWithColor("Inputed Id is not exist!", ConsoleColor.Red);
+                goto EnterIdDesc;
+            }
+            var druggists = _druggistRepository.GetAll();
+            ConsoleHelper.WriteWithColor("* -- All Druggists -- *");
+            if (druggists.Count is 0)
+            {
+                return;
+            }
+            foreach (var druggist in drugStore.Druggists)
+            {
+                ConsoleHelper.WriteWithColor($"ID:{druggist.Id} Name:{druggist.Name} {druggist.Surname}");
+            }
         }
     }
 }

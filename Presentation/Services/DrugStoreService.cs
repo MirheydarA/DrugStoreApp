@@ -34,20 +34,29 @@ namespace Presentation.Services
             ConsoleHelper.WriteWithColor("Enter DrugStore address", ConsoleColor.Cyan);
             string address = Console.ReadLine();
             ConsoleHelper.WriteWithColor("Enter DrugStore contact number", ConsoleColor.Cyan);
-            string contactnumber = Console.ReadLine();//regex
+            NumberDesc: string contactnumber = Console.ReadLine();
+            if (!contactnumber.IsPhoneNumber())
+            {
+                ConsoleHelper.WriteWithColor("Contact number is not correct format!", ConsoleColor.Red);
+                goto NumberDesc;
+            }
+            if (true)
+            {
+
+            }
         EmailDesc: ConsoleHelper.WriteWithColor("Enter Drugstore email", ConsoleColor.Cyan);
             string email = Console.ReadLine();
-            //if (!email.IsEmail())
-            //{
-            //    ConsoleHelper.WriteWithColor("Email is not correct format!", ConsoleColor.Red);
-            //    goto EmailDesc;
-            //}
+            if (!email.IsEmail())
+            {
+                ConsoleHelper.WriteWithColor("Email is not correct format!", ConsoleColor.Red);
+                goto EmailDesc;
+            }
 
-            //if (_drugStoreRepository.IsDuplicatedEmail(email))
-            //{
-            //    ConsoleHelper.WriteWithColor("This email already used!", ConsoleColor.Red);
-            //    goto EmailDesc;
-            //}
+            if (_drugStoreRepository.IsDuplicatedEmail(email))
+            {
+                ConsoleHelper.WriteWithColor("This email already used!", ConsoleColor.Red);
+                goto EmailDesc;
+            }
 
             _ownerService.GetAll();
         EnterIdDesc: ConsoleHelper.WriteWithColor("Enter Owner ID", ConsoleColor.Cyan);
@@ -88,7 +97,7 @@ namespace Presentation.Services
             }
             foreach (var drugStore in drugStores)
             {
-                ConsoleHelper.WriteWithColor($"ID:{drugStore.Id} Name:{drugStore.Name} Email:{drugStore.Email} Owner:{drugStore.Owner.Name} {drugStore.Owner.Surname} {drugStore.Owner.Id} ");
+                ConsoleHelper.WriteWithColor($"ID:{drugStore.Id} Name:{drugStore.Name} Email:{drugStore.Email} Owner:{drugStore.Owner.Name} {drugStore.Owner.Surname}");
             }
         }
 

@@ -33,20 +33,24 @@ namespace Presentation.Services
             ConsoleHelper.WriteWithColor("Enter Drug name", ConsoleColor.Cyan);
             string name = Console.ReadLine();
         EnterPrice: ConsoleHelper.WriteWithColor("Enter Drug price", ConsoleColor.Cyan);
-            int price;
-            bool isSucceeded = int.TryParse(Console.ReadLine(), out price);
+            double price;
+            bool isSucceeded = double.TryParse(Console.ReadLine(), out price);
             if (!isSucceeded)
             {
                 ConsoleHelper.WriteWithColor("Inputed price is not correct format!", ConsoleColor.Red);
                 goto EnterPrice;
             }
-            ConsoleHelper.WriteWithColor("Enter Drug count", ConsoleColor.Cyan);
+        EnterCount: ConsoleHelper.WriteWithColor("Enter Drug count", ConsoleColor.Cyan);
             int count;
             isSucceeded = int.TryParse(Console.ReadLine(), out count);
             if (!isSucceeded)
             {
                 ConsoleHelper.WriteWithColor("Inputed count is not correct format!", ConsoleColor.Red);
-                goto EnterPrice;
+                goto EnterCount;
+            }
+            if (count <= 0)
+            {
+                ConsoleHelper.WriteWithColor("Inputed count must be bigger than 0!", ConsoleColor.Red);
             }
 
             _drugStoreService.GetAll();
@@ -159,7 +163,7 @@ namespace Presentation.Services
         {
             GetAll();
 
-            if (_drugRepository != null)
+            if (_drugRepository.GetAll().Count is 0)
             {
                 return;
             }
@@ -197,6 +201,10 @@ namespace Presentation.Services
                 ConsoleHelper.WriteWithColor("Inputed count is not correct format!", ConsoleColor.Red);
                 goto EnterPrice;
             }
+            if (count <= 0)
+            {
+                ConsoleHelper.WriteWithColor("Inputed count must be bigger than 0!", ConsoleColor.Red);
+            }
 
             _drugStoreService.GetAll();
             ConsoleHelper.WriteWithColor("Enter new DrugStore ID");
@@ -217,13 +225,42 @@ namespace Presentation.Services
             drug.Name = name;
             drug.Price = price;
             drug.Count = count;
-            
+
             drug.DrugStore = drugStore;
 
             drugStore.Drugs.Add(drug);
             _drugRepository.Add(drug);
             ConsoleHelper.WriteWithColor($"{drug.Name}  is succesfully updated", ConsoleColor.Green);
-            
+
+        }
+
+        public void Filter()
+        {
+        EnterPrice: ConsoleHelper.WriteWithColor("Enter price", ConsoleColor.Cyan);
+            double price;
+            bool isSucceeded = double.TryParse(Console.ReadLine(), out price);
+            if (!isSucceeded)
+            {
+                ConsoleHelper.WriteWithColor("Inputed price is not correct format!", ConsoleColor.Red);
+                goto EnterPrice;
+            }
+
+            var drugs = _drugRepository.GetAll();
+            if (drugs.Count == 0)
+            {
+                ConsoleHelper.WriteWithColor("There is no any drug!", ConsoleColor.Red);
+            }
+            foreach (var drug in drugs)
+            {
+                if (drug.Price > price)
+                {
+                    ConsoleHelper.WriteWithColor($"ID:{drug.Id} Name:{drug.Name} Price:{drug.Price} Count:{drug.Count} DrugStore:{drug.DrugStore.Name}");
+                }
+                else
+                {
+                    ConsoleHelper.WriteWithColor("There is no any drug below the price you entered", ConsoleColor.Red);
+                }
+            }
         }
     }
 }

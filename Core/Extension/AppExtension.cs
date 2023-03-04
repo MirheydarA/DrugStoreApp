@@ -13,5 +13,10 @@ namespace Core.Extension
         {
             return Regex.IsMatch(text, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
         }
+
+        public static bool IsPhoneNumber(this string text1) 
+        {
+            return Regex.IsMatch(text1, ("^\\+?[1-9][0-9]{7,12}$") ,RegexOptions.IgnoreCase);
+        }
     }
 }

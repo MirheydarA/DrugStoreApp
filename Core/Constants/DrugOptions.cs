@@ -13,6 +13,7 @@ namespace Core.Constants
         Update,
         Delete,
         GetAll,
-        GetDrugsByDrugstore
+        GetDrugsByDrugstore,
+        Filter
     }
 }
