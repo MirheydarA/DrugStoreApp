@@ -28,7 +28,7 @@ namespace Data.Repositories.Concrete
         }
         public void Update(DrugStore drugStore)
         {
-            var dbDrugStore = DbContext.DrugStores.FirstOrDefault(dr => dr.Id == id);
+            var dbDrugStore = DbContext.DrugStores.FirstOrDefault(dr => dr.Id == drugStore.Id);
             if (dbDrugStore != null)
             {
                 dbDrugStore.Name= drugStore.Name;

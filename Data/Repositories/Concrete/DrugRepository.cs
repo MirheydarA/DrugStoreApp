@@ -32,7 +32,7 @@ namespace Data.Repositories.Concrete
 
         public void Update(Drug drug)
         {
-            var dbDrugs = DbContext.Drugs.FirstOrDefault(drugs => drugs.Id == id);
+            var dbDrugs = DbContext.Drugs.FirstOrDefault(drugs => drugs.Id == drug.Id);
             if (dbDrugs != null)
             {
                 drug.Name= dbDrugs.Name;
@@ -45,5 +45,12 @@ namespace Data.Repositories.Concrete
         {
             DbContext.Drugs.Remove(drug);
         }
+
+        //public Drug Filter(double price)
+        //{
+        //    var dbDrugs = DbContext.Drugs.Where< drugs => >
+
+
+        //}
     }
 }

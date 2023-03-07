@@ -31,7 +31,7 @@ namespace Data.Repositories.Concrete
 
         public void Update(Druggist druggist)
         {
-            var dbDruggist = DbContext.Druggists.FirstOrDefault(druggist=> druggist.Id == id);
+            var dbDruggist = DbContext.Druggists.FirstOrDefault(druggist=> druggist.Id == druggist.Id);
             if (dbDruggist != null)
             {
                 druggist.Name= dbDruggist.Name;

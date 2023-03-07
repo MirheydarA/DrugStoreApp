@@ -203,6 +203,7 @@ namespace Presentation.Services
             druggist.DrugStore = drugStore;
            
             _druggistRepository.Update(druggist);
+            
             ConsoleHelper.WriteWithColor("Druggist is succesfully updating", ConsoleColor.Green);
         }
 
@@ -232,11 +233,12 @@ namespace Presentation.Services
             ConsoleHelper.WriteWithColor("* -- All Druggists -- *");
             if (druggists.Count is 0)
             {
+                ConsoleHelper.WriteWithColor("There is no any Druggist!", ConsoleColor.Red);
                 return;
             }
             foreach (var druggist in drugStore.Druggists)
             {
-                ConsoleHelper.WriteWithColor($"ID:{druggist.Id} Name:{druggist.Name} {druggist.Surname}");
+                ConsoleHelper.WriteWithColor($"ID:{druggist.Id} Name:{druggist.Name} Surname:{druggist.Surname}");
             }
         }
     }

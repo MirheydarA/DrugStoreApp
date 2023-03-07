@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
 using Core.Extension;
 using Core.Helpers;
+using Data.Repositories.Abstract;
 using Data.Repositories.Concrete;
 using System;
 using System.Collections.Generic;
@@ -155,9 +156,13 @@ namespace Presentation.Services
             ConsoleHelper.WriteWithColor("Enter new DrugStore address", ConsoleColor.Cyan);
             string address = Console.ReadLine();
             //
-            ConsoleHelper.WriteWithColor("Enter new DrugStore contact number", ConsoleColor.Cyan);
+            NumberDesc: ConsoleHelper.WriteWithColor("Enter new DrugStore contact number", ConsoleColor.Cyan);
             string contactnumber = Console.ReadLine();//regex
-            //
+            if (!contactnumber.IsPhoneNumber())
+            {
+                ConsoleHelper.WriteWithColor("Contact number is not correct format!", ConsoleColor.Red);
+                goto NumberDesc;
+            }
         NewEmailDesc: ConsoleHelper.WriteWithColor("Enter new Drugstore email", ConsoleColor.Cyan);
             string email = Console.ReadLine();
             if (!email.IsEmail())
@@ -197,6 +202,41 @@ namespace Presentation.Services
 
             _drugStoreRepository.Update(drugStore);
             ConsoleHelper.WriteWithColor("DrugStore is succesfully updating", ConsoleColor.Green);
+        }
+
+        public void GetDrugStoresByOwner()
+        {
+            _ownerService.GetAll();
+            if (_ownerRepository.GetAll().Count is 0)
+            {
+                ConsoleHelper.WriteWithColor("You must create Owner first!", ConsoleColor.DarkCyan);
+                return;
+            }
+        EnterIdDesc: ConsoleHelper.WriteWithColor("Enter Owner ID");
+            int id;
+            bool isSucceeded = int.TryParse(Console.ReadLine(), out id);
+            if (!isSucceeded)
+            {
+                ConsoleHelper.WriteWithColor("Inputed Id is not correct format!", ConsoleColor.Red);
+                goto EnterIdDesc;
+            }
+            var owner = _ownerRepository.Get(id);
+            if (owner is null)
+            {
+                ConsoleHelper.WriteWithColor("Inputed Id is not exist!", ConsoleColor.Red);
+                goto EnterIdDesc;
+            }
+            var drugStores = _drugStoreRepository.GetAll();
+            ConsoleHelper.WriteWithColor("* -- All Drugs -- *");
+            if (drugStores.Count is 0)
+            {
+                ConsoleHelper.WriteWithColor("There is no any DrugStore", ConsoleColor.Red);
+                return;
+            }
+            foreach (var drugStore in owner.Drugstores)
+            {
+                ConsoleHelper.WriteWithColor($"ID:{drugStore.Id} Name:{drugStore.Name} ");
+            }
         }
     }
 }

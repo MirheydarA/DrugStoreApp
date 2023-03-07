@@ -104,6 +104,7 @@ namespace Presentation
                             ConsoleHelper.WriteWithColor("2. Update DrugStore", ConsoleColor.DarkYellow);
                             ConsoleHelper.WriteWithColor("3. Delete DrugStore", ConsoleColor.DarkYellow);
                             ConsoleHelper.WriteWithColor("4. Get all DrugStore", ConsoleColor.DarkYellow);
+                            ConsoleHelper.WriteWithColor("5. Get all DrugStore By Owner", ConsoleColor.DarkYellow);
                             ConsoleHelper.WriteWithColor("0. Back to main menu", ConsoleColor.DarkYellow);
 
 
@@ -131,6 +132,10 @@ namespace Presentation
 
                                 case (int)DrugStoreOptions.GetAll:
                                     _drugStoreService.GetAll();
+                                    break;
+
+                                case (int)DrugStoreOptions.GetDrugStoresByOwner:
+                                    _drugStoreService.GetDrugStoresByOwner();
                                     break;
 
                                 case (int)DrugStoreOptions.BackToMainMenu:
@@ -316,7 +321,7 @@ namespace Presentation
 
 
                     case (int)MainMenuOptions.Logout:
-                        goto MainMenuDesc;
+                        goto Authorize;
 
                     default:
                         ConsoleHelper.WriteWithColor("Your choise is not correct!", ConsoleColor.Red);

@@ -77,14 +77,14 @@ namespace Presentation.Services
 
         public void Update()
         {
-            GetAll();
+        UpdatıngDesc: GetAll();
 
             if (_ownerRepository.GetAll().Count == 0)
             {
                 return;
             }
 
-        UpdatıngDesc: ConsoleHelper.WriteWithColor("Enter owner ID for updating", ConsoleColor.Cyan);
+         ConsoleHelper.WriteWithColor("Enter owner ID for updating", ConsoleColor.Cyan);
             int id;
             bool isSucceeded = int.TryParse(Console.ReadLine(), out id);
             if (!isSucceeded)
@@ -99,15 +99,15 @@ namespace Presentation.Services
                 goto UpdatıngDesc;
             }
             ConsoleHelper.WriteWithColor("Enter new name");
-            string name = Console.ReadLine();
+            string newname = Console.ReadLine();
             ConsoleHelper.WriteWithColor("Enter new surname");
-            string surname = Console.ReadLine();
+            string newsurname = Console.ReadLine();
 
-            owner.Name = name;
-            owner.Surname = surname;
+            owner.Name= newname;
+            owner.Surname = newsurname;
 
             _ownerRepository.Update(owner);
-            ConsoleHelper.WriteWithColor("Owner is succesfully updating", ConsoleColor.Green);
+            ConsoleHelper.WriteWithColor("Owner is succesfully updated", ConsoleColor.Green);
         }
     }
 }

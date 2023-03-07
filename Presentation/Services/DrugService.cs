@@ -252,7 +252,7 @@ namespace Presentation.Services
             }
             foreach (var drug in drugs)
             {
-                if (drug.Price > price)
+                if (drug.Price < price)
                 {
                     ConsoleHelper.WriteWithColor($"ID:{drug.Id} Name:{drug.Name} Price:{drug.Price} Count:{drug.Count} DrugStore:{drug.DrugStore.Name}");
                 }

@@ -29,8 +29,8 @@ namespace Data.Repositories.Concrete
         }
         public void Update(Owner owner)
         {
-            var dbOwner = DbContext.Owners.FirstOrDefault(o => o.Id == id);
-            if (dbOwner != null)
+            var dbOwner = DbContext.Owners.FirstOrDefault(o => o.Id == owner.Id);
+            if (dbOwner is not null)
             {
                 dbOwner.Name= owner.Name;
                 dbOwner.Surname= owner.Surname;
